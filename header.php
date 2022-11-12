@@ -11,7 +11,8 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-$container = get_theme_mod('understrap_container_type')
+$bootstrap_version = get_theme_mod('understrap_bootstrap_version', 'bootstrap4');
+$navbar_type       = get_theme_mod('understrap_navbar_type', 'collapse');
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -28,25 +29,8 @@ $container = get_theme_mod('understrap_container_type')
 	<div class="site" id="page">
 
 		<!-- ******************* The Navbar Area ******************* -->
-		<div id="wrapper-navbar">
-			<nav id="main-nav" class="navbar navbar-expand-lg navbar-dark bg-primary" aria-labelledby="main-nav-label">
-				<div class="container">
-					<?php
-					wp_nav_menu(
-						array(
-							'theme_location' => 'primary menu',
-							'container_class' => 'collapse navbar-collapse',
-							'container_id' => 'navbarNavDropdown',
-							'menu_class' => 'navbar-nav ml-auto',
-							'fallback_cb' => '',
-							'menu_id' => 'main-menu',
-							'depth' => 2,
-							'walker' => new Understrap_WP_Bootstrap_Navwalker(),
-						)
-					);
-					?>
-				</div>
-			</nav>
-		</div>
+		<div id="wrapper-navbar" class="">
 
-		<!-- #wrapper-navbar end -->
+			<?php get_template_part('global-templates/navbar', $navbar_type . '-' . $bootstrap_version); ?>
+
+		</div><!-- #wrapper-navbar end -->
